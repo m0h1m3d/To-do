@@ -3,9 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./Assets/icons/title.png" type="image/x-icon">
+    <title>Todo</title>
 </head>
 <body>
-    
+    <!-- main -->
+   <div class="main-container">
+    <div class="side">
+        <div class="view-btns">
+            <h1 class="heading">ToDo</h1>
+            <button class="home-btn">Home</button>
+            <button class="task-btn">Tasks</button>
+        </div>
+            <div class="projects-container">
+                <h1 class="project-heading">Projects</h1>
+                <ul class="project-list">
+                    <li class="project-item">
+                        <button class="project-btn">gaming</button>
+                    </li>
+                    <li class="project-item">
+                        <button class="project-btn">gaming</button>
+                    </li>
+                </ul>
+            </div>
+        <div class="modal-btns">
+            <button class="display-add-btn">+</button>
+            <button class="add-task">Add Task</button>
+            <button class="add-project">Add Project</button>
+        </div>
+    </div>
+
+    <!-- display  -->
+    <div class="display">
+        <!-- <div class="task hidden" data-index="1">
+            <p>Title: <span class="title"></span></p>
+            <p>Description: <span class="Description"></span></p>
+            <p>Due-Date: <span class="date"></span></p>
+            <p>Priority: <span class="P"></span></p>
+        </div> -->
+
+        <!-- <div class="preview" data-index="1">
+            <div class="priority"></div>
+            <div class="info">
+                <div class="checkBox"></div>
+                <p class="title-preview">Title</p>
+            </div>
+            <div class="info-btns">
+                <p class="due-Date-preview">date</p>
+                <button class="edit">View</button>
+                <button class="delete">Delete</button>
+            </div>
+        </div> -->
+    </div>
+   </div>
+
+   <!-- overaly  -->
+   <div class="overlay hidden"></div>
+
+   <!-- task modal  -->
+   <div class="modal-task hidden">
+       <form class="task-form">
+       <h1 class="modal-task-heading">AddTask</h1>
+        <input type="text" name="title" id="title" class="title-task" placeholder="Title: Movie Night" required>
+
+        <textarea class="description-task" placeholder="Description: Pulp Fiction on thursday" required></textarea>
+
+         <label for="dueDate" class="label"> Due-Date:
+             <input type="date" name="Due-Date" id="due-Date" class="date-task" required>
+         </label>
+
+         <label for="priority" class="label"> Priority:
+            <button class="btn high" data-priority="highPr">High</button>
+            <button class="btn moderate" data-priority="moderatePr">Moderate</button>
+            <button class="btn low" data-priority="lowPr">Low</button>
+        </label>
+        <button class="modal-task-add-btn">Add Task</button>
+    </form>
+    </div>
+
+    <!-- project-modal  -->
+    <div class="modal-project hidden">
+        <h1 class="modal-project-heading">Add Project</h1>
+
+         <input type="text" name="title" id="l" class="title-project" placeholder="Title: Gym">
+         
+        <button class="modal-project-add-btn">Add Project</button>
+     </div>
 </body>
 </html>
