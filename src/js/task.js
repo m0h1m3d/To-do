@@ -1,55 +1,84 @@
 class Task {
-  title = document.querySelector('.title-task');
-  description = document.querySelector('.description-task');
-  date = document.querySelector('.date-task');
-  tasks = [];
-  priority;
+  constructor() {
+    this.title = document.querySelector('.title-task');
+    this.description = document.querySelector('.description-task');
+    this.date = document.querySelector('.date-task');
+    this.tasks = [];
+    this.priority = null;
+    this.completed = false;
+  }
 
-  addTask(){
-    this.tasks.push({
+  generateId() {
+    return Date.now();
+  }
+
+  addTask() {
+    const id = this.generateId();
+    const task = {
+      id: id,
       title: this.title.value,
       description: this.description.value,
       date: this.date.value,
-      priority: this.priority
-    });
-    console.log(this.tasks);
+      priority: this.priority,
+      completed: this.completed,
+    };
+    this.tasks.push(task);
+    this.resetValues();
+    return task;
   }
 
-  getPriority(value){
+  removeTask(id) {
+    this.tasks = this.tasks.filter(task => task.id !== parseInt(id));
+  }
+
+  setPriority(value) {
     this.priority = value;
   }
 
-  getTaskMarkup() {
-    if (!this.title.value || !this.date.value || !this.description.value)
-      return false;
-
-    const taskMarkup = `
-    <div class="task" data-index="1">
-        <p>Title: ${this.title.value}</p>
-        <p>Description: ${this.description.value}</p>
-        <p>Due-Date: ${this.date.value}</p>
-        <p>Priority: ${this.priority}</p>
-    </div>`;
-
-    return taskMarkup;
+  getAllTasks(){
+    return this.tasks;
   }
 
-  getPreviewMarkup() {
-    if (!this.title.value || !this.date.value) return false;
-    const previewMarkup = `
-        <div class="preview">
+  getTaskMarkup(task) {
+    return `
+      <div class="task task-style" data-id="${task.id}">
+        <button class="red close-task">X</button>
+        <p>Title: ${task.title}</p>
+        <p>Description: ${task.description}</p>
+        <p>Due-Date: ${task.date}</p>
+        <p class ="${
+          task.priority === 'highPr' ? 'red' :
+          task.priority === 'moderatePr' ? 'blue' :
+          task.priority === 'lowPr' ? 'green' : ''
+        }">Priority: ${task.priority}</p>
+        <p>Completed: ${task.completed === true? 'Yes 😁':'No ☹'}</p>
+      </div>`;
+  }
+
+  getPreviewMarkup(task) {
+    return `
+      <div class="preview" data-id="${task.id}">
         <div class="info">
-            <div class="priority ${this.priority}"></div>
-            <div class="checkBox"></div>
-            <p class="title-preview">${this.title.value}</p>
+          <div class="priority ${task.priority}"></div>
+          <div class="checkBox" data-id="${task.id}"></div>
+          <p class="title-preview">${task.title}</p>
         </div>
         <div class="info-btns">
-            <p class="due-Date-preview">${this.date.value}</p>
-            <button class="viewBtn">View</button>
-            <button class="delete">Delete</button>
+          <p class="due-Date-preview">${task.date}</p>
+          <button class="viewBtn" data-id="${task.id}">View</button>
+          <button class="delete task-del" data-id="${task.id}">Delete</button>
         </div>
-    </div>`;
-    return previewMarkup;
+      </div>`;
+  }
+
+  getTaskById(id) {
+    return this.tasks.find(task => task.id === parseInt(id));
+  }
+
+  resetValues(){
+    this.title.value = ''; 
+    this.description.value = '';
+    this.date.value = '';
   }
 }
 

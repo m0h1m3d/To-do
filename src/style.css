@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body{
@@ -9,6 +10,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .main-container{
@@ -20,7 +22,7 @@ body{
     justify-content: space-between;
     padding: 20px;
     gap: 10px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
 }
 
 .side{
@@ -54,7 +56,7 @@ body{
     padding: 20px;
 }
 
-.task-btn, .display-add-btn, .home-btn, .add-task, .add-project{
+.task-btn, .display-add-btn, .add-task, .add-project{
     border: transparent;
     background-color: transparent;
     cursor: pointer;
@@ -62,7 +64,7 @@ body{
     font-size: 1rem;
 }
 
-.task-btn, .home-btn{
+.task-btn{
     color: #000;
     height: 2.5rem;
     width: 100%;
@@ -71,7 +73,7 @@ body{
     transition: all 0.5s;
 }
 
-.task-btn:hover, .home-btn:hover{
+.task-btn:hover{
     background-color: #e7e4e4;
 }
 
@@ -123,6 +125,47 @@ body{
     width: 100%;
 }
 
+.project-display{
+    height: 100%;
+    width: 100%;
+}
+
+.project{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.project-header{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 5px;
+    /* align-items: center; */
+}
+
+.project-header .delete{
+    align-self: flex-end;
+    height: 30%;
+    width: 10%;
+    cursor: pointer;
+}
+
+.add-project-task{
+    align-self: flex-end;
+    background: rgb(61, 177, 61);
+    height: 30%;
+    width: 10%;
+    border: transparent;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 .modal-btns{
     z-index: 999;
     display: flex;
@@ -131,12 +174,12 @@ body{
 }
 
 .display-add-btn{
-    border: 4px solid;
     background-color: #fff;
     height: 4rem;
     width: 4rem;
     border-radius: 50%;
     font-size: 3rem;
+    transition: all 0.5s;
     transition: all 0.5s;
 }
 
@@ -176,18 +219,33 @@ body{
 
 .task{
     height: 50%;
-    width: 70%;
+    width: 50%;
     background-color: rgb(255, 255, 255);
-    position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: flex-start;
     padding: 10px;
     border-radius: 10px;
     font-weight: 700;
     transition: all 0.5s;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     z-index: 999;
+}
+
+.close-task{
+    height: 20px;
+    width: 40px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: transparent;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+    align-self: flex-end;
 }
 
 .info{
@@ -224,22 +282,22 @@ body{
     margin-right: 10px;
 }
 
-.viewBtn, .delete{
+.viewBtn, .viewBtnPr, .delete, .deletePr{
     width: 20%;
     height: 50%;
     border-radius: 10px;
     border: transparent;
     font-weight: 700;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     color: #fff;
     cursor: pointer;
 }
 
-.viewBtn{
+.viewBtn, .viewBtnPr{
     background-color: burlywood;
 }
 
-.delete{
+.delete, .deletePr{
     background-color: rgb(238, 77, 77);
 }
 
@@ -258,9 +316,10 @@ body{
     position: absolute;
     backdrop-filter: blur(3px);
     transition: all 0.3s;
+    z-index: 10;
 }
 
-.modal-task{
+.modal-task, .modal-project-task{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -277,7 +336,7 @@ body{
     padding: 20px;
     color: #ffffff;
     font-weight: 700;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     z-index: 999;
 }
 
@@ -300,7 +359,7 @@ body{
     gap: 5px;
 }
 
-.title-task, .date-task{
+.title-task, .date-task, .title-Ptask, .date-Ptask{
     font-size: 1rem;
     width: 50%;
     padding: 5px;
@@ -309,15 +368,15 @@ body{
     border: transparent;
 }
 
-.title-task{
+.title-task, .titel-Ptask{
     height: 7%;
 }
 
-.title-task::placeholder{
+.title-task::placeholder, .title-Ptask::placeholder{
     font-size: 1rem;
 }
 
-.description-task{
+.description-task, .description-Ptask{
     width: 80%;
     height: 7rem;
     padding: 5px;
@@ -328,7 +387,7 @@ body{
     resize: none;
 }
 
-.modal-task-add-btn, .modal-project-add-btn{
+.modal-task-add-btn, .modal-project-task-add-btn, .modal-project-add-btn{
     color: black;
     background-color: #fff;
     height: 10%;
@@ -339,7 +398,7 @@ body{
     align-self: flex-end;
     cursor: pointer;
     font-weight: 700;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     font-size: 1rem;
     border: transparent;
 }
@@ -353,7 +412,7 @@ body{
     color: #fff;
     font-size: 1rem;
     font-weight: 700;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     cursor: pointer;
     opacity: 0.5;
     transition: opacity 0.5s;
@@ -375,6 +434,18 @@ body{
     background: rgb(53, 201, 53);
 }
 
+.red{
+    color: rgb(238, 77, 77);
+}
+
+.blue{
+    color: rgb(47, 107, 238); 
+}
+
+.green{
+    color: rgb(53, 201, 53);
+}
+
 .modal-project{
     position: absolute;
     top: 50%;
@@ -391,7 +462,7 @@ body{
     padding: 20px;
     color: #ffffff;
     font-weight: 700;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
     z-index: 999;
 }
 
