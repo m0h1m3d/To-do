@@ -20,6 +20,7 @@ class Dom {
     this.mainContainer.addEventListener('click', (e) => {
       if (e.target.classList.contains('display-add-btn')) {
         this.overlay.classList.remove('hidden');
+
         this.displayAddBtn.style.transform = 'scale(1.5)';
         setTimeout(() => {
           this.displayAddBtn.style.transform = '';
@@ -44,42 +45,43 @@ class Dom {
 
       if (e.target.classList.contains('close-task')) {
         e.target.closest('.task').classList.add('hidden');
+
         this.overlay.classList.add('hidden');
       }
 
       if (e.target.classList.contains('viewBtn')) {
-        Display.handleTaskViewButtonClick(e);
+        Display.viewTask(e);
       }
 
       if (e.target.classList.contains('viewBtnPr')) {
-        Display.handleProjectTaskViewButtonClick(e);
+        Display.viewProjectTask(e);
       }
 
       if (e.target.classList.contains('task-del')) {
-        Display.handleTaskDeleteButtonClick(e);
+        Display.removeTask(e);
       }
 
       if (e.target.classList.contains('deletePr')) {
-        Display.handleProjectTaskDeleteButtonClick(e);
+        Display.removeProjectTask(e);
       }
 
       if (e.target.classList.contains('add-project-task')) {
-        Display.handleProjectAddTaskButtonClick(e);
+        Display.addProjectTask(e);
       }
 
       if (e.target.classList.contains('project-del')) {
-        Display.handleProjectDeleteButtonClick(e);
+        Display.removeProject(e);
       }
 
       if (e.target.classList.contains('checkBox')) {
         if(e.target.style.backgroundColor === 'lightgreen'){
           e.target.style.backgroundColor ='';
           e.target.closest('.info').querySelector('.title-preview').style.textDecoration = '';
-          Display.handlecheckBoxButtonRemove(e);
+          Display.removeCheckBox(e);
         }else{
           e.target.style.backgroundColor = 'lightgreen';
           e.target.closest('.info').querySelector('.title-preview').style.textDecoration = 'line-through';
-          Display.handlecheckBoxButtonClick(e);
+          Display.addCheckBox(e);
         }
       }
     });
@@ -87,13 +89,7 @@ class Dom {
     this.modalTask.addEventListener('click', (e) => {
       e.preventDefault();
 
-      if (e.target.tagName === 'BUTTON') {
-        document.querySelectorAll('.btn').forEach((b) => {
-          b.style.opacity = '0.5';
-        });
-        e.target.style.opacity = '1';
-      }
-      
+      this.opacityStyle()
 
       if (e.target.classList.contains("btn")) {
         Task.setPriority(e.target.dataset.priority);
@@ -103,19 +99,12 @@ class Dom {
     this.modalProjectTask.addEventListener('click', (e) => {
       e.preventDefault();
 
-      if (e.target.tagName === 'BUTTON') {
-        document.querySelectorAll('.btn').forEach((b) => {
-          b.style.opacity = '0.5';
-        });
-        e.target.style.opacity = '1';
-      }
-      
+      this.opacityStyle
 
       if (e.target.classList.contains("btn")) {
         Project.setPriority(e.target.dataset.priority);
       }
     });
-    
 
     this.overlay.addEventListener('click', () => {
       this.modalProject.classList.add('hidden');
@@ -129,6 +118,15 @@ class Dom {
       this.addTaskBtn.style.transform = '';
     });
   }
+
+  opacityStyle(e){
+    if (e.target.tagName === 'BUTTON') {
+      document.querySelectorAll('.btn').forEach((b) => {
+        b.style.opacity = '0.5';
+      });
+      e.target.style.opacity = '1';
+    }
+  };
 
   showTaskModal() {
     this.modalTask.classList.remove('hidden');

@@ -84,21 +84,21 @@ class Display {
     this.addProjectBtn.classList.remove('show');
   }
 
-  handleTaskViewButtonClick(event) {
+  viewTask(event) {
     const id = event.target.dataset.id;
     const task = Task.getTaskById(id);
     this.renderTask(task);
     Dom.showOverlay();
   }
 
-  handleProjectTaskViewButtonClick(event){
+  viewProjectTask(event){
     const id = event.target.dataset.id;
     const task = Project.getTaskById(id);
 
     this.renderProjectTask(task);
   }
 
-  handleTaskDeleteButtonClick(event) {
+  removeTask(event) {
     const id = event.target.dataset.id;
     Task.removeTask(id);
 
@@ -108,11 +108,11 @@ class Display {
     }
   }
 
-  handleProjectAddTaskButtonClick(e) {
+  addProjectTask(e) {
     Dom.showProjectTaskModal();
   }
 
-  handleProjectDeleteButtonClick(event) {
+  removeProject(event) {
     const id = event.target.dataset.id;
     Project.removeProject(id);
 
@@ -127,7 +127,7 @@ class Display {
     }
   }
 
-  handleProjectTaskDeleteButtonClick(e){
+  removeProjectTask(e){
     const id = e.target.dataset.id;
     Project.removeTask(id);
 
@@ -137,7 +137,7 @@ class Display {
     }
   };
 
-  handlecheckBoxButtonClick(e){
+  addCheckBox(e){
     const id = e.target.dataset.id;
     if(Task.tasks.some(task=>task.id === parseInt(id))){
       const task = Task.getTaskById(id);
@@ -148,7 +148,7 @@ class Display {
     }
   };
 
-  handlecheckBoxButtonRemove(e){
+  removeCheckBox(e){
     const id = e.target.dataset.id;
     if(Task.tasks.some(task=>task.id === parseInt(id))){
       const task = Task.getTaskById(id);

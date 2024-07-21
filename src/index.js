@@ -37,9 +37,11 @@ container.addEventListener('click', (e) => {
 
   if (e.target.classList.contains('project-btn')) {
     e.preventDefault();
+
     const projectId = e.target.dataset.id;
     document.querySelector('.project-id').value = projectId;
     const project = Project.getProjectById(projectId);
+
     Dom.resetDisplay();
     Display.renderProject(project);
   }
@@ -53,8 +55,8 @@ container.addEventListener('click', (e) => {
     e.preventDefault();
     const projectId = document.querySelector('.project-id').value;
     const newTask = Project.addTask(projectId);
-    Display.renderProjectTaskPreview(newTask);
 
+    Display.renderProjectTaskPreview(newTask);
     Dom.hideProjectTaskModal();
   }
-})
+});
